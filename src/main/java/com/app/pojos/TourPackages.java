@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor     
 @ToString
 public class TourPackages extends BaseEntity {
-@Column(length=10,unique=true)
+@Column(length=10)
 @Enumerated(EnumType.STRING)
 private PackageType packageType;
 @NotBlank(message="PackageName must be supplied")
@@ -32,4 +32,10 @@ private Double price;
 @NotBlank(message="PackageName must be supplied")
 @Column(length=2000)
 private String packageDetails;
+@NotBlank(message="Places Must be supplied")
+@Column(length=1000)
+private String placesToBeVisited;
+@NotBlank(message ="Days and Nights must be supplied")
+@Column(length=30)
+private String daysAndNights;
 }
