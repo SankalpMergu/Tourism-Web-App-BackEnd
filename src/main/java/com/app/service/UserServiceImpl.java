@@ -48,6 +48,19 @@ public class UserServiceImpl implements IUserService {
 		
 	}
 	
+	
+	@Override
+	public User getDetails(String userEmail) {
+		return userRepo.findByEmail(userEmail).
+				orElseThrow(() -> new UserHandlingException("Invalid User ID !!!!!"));
+		
+	}
+
+	@Override
+	public User updateDetails(User detachedUser) {
+		return userRepo.save(detachedUser);
+	}
+	
 
 }
  

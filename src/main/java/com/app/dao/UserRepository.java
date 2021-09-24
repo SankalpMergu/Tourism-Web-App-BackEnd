@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.app.pojos.User;
 public interface UserRepository extends JpaRepository<User,Integer>{
 Optional<User> findByEmailAndPassword(String userEmail,String userPassword);
+Optional<User> findByEmail(String userEmail);
 Boolean existsByEmail(String email);
 }
