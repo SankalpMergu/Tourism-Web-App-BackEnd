@@ -32,7 +32,6 @@ private String lastName;
 private String email;
 @NotBlank(message="Password must be supplied")
 @Column(length=15)
-//@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
 private String password;
 @NotBlank(message="MobileNo must be supplied")
 @Column(length=10)

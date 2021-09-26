@@ -7,12 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "guidetbl")
-public class Guide {
-	@Id  
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+public class Guide extends BaseEntity{
 	
 	@Column(name="name")
 	private String name;
@@ -23,55 +29,7 @@ public class Guide {
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="package_id")
-	private int packageId;
+	@Column(name="known_location")
+	private String locationKnown;
 	
-	public Guide() {
-	}
-	
-	public Guide(int id, String name, String mobile, String email, int packageId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.mobile = mobile;
-		this.email = email;
-		this.packageId = packageId;
-	}
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public int getPackageId() {
-		return packageId;
-	}
-	public void setPackageId(int packageId) {
-		this.packageId = packageId;
-	}
-
-	@Override
-	public String toString() {
-		return "Guide [id=" + id + ", name=" + name + ", mobile=" + mobile + ", email=" + email + ", packageId="
-				+ packageId + "]";
-	}
 }

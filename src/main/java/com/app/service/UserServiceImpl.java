@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.time.LocalDateTime;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,7 @@ public class UserServiceImpl implements IUserService {
 		    throw new UserHandlingException("Account Already Exist");
 		}else {
 			userRepo.save(newUser);
+			newUser.setRegisterDate(LocalDateTime.now());
 			return "User Added Successfully";
 			
 		}
