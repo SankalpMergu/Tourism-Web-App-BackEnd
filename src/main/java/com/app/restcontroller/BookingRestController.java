@@ -10,16 +10,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dao.BookingRepository;
+import com.app.dao.GuideRepository;
 import com.app.dao.PackageRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.BookingRequest;
+import com.app.dto.UpdatedBookingDetails;
 import com.app.pojos.Booking;
 import com.app.pojos.BookingStatus;
+import com.app.pojos.Guide;
 import com.app.pojos.TourPackages;
 import com.app.pojos.User;
 
@@ -36,6 +40,9 @@ public class BookingRestController {
 	
 	@Autowired
 	private BookingRepository bookRepo;
+	
+	@Autowired
+	private GuideRepository guideRepo;
 
 	@PostMapping("/booking")
 	@Transactional
@@ -47,7 +54,7 @@ public class BookingRestController {
 		TourPackages currtour=packRepo.findById(bookingDetails.getPackageId()).get();
 		//System.out.println(currtour);
 		//System.out.println(curruser);
-		try {
+		try { 
 			Booking bookUserTour=new Booking();
 			bookUserTour.setPackageId(currtour);
 			bookUserTour.setUserId(curruser);
@@ -64,13 +71,26 @@ public class BookingRestController {
 		}
 	}
 	
-	@GetMapping("/booking")
+	@GetMapping("/bookings")
 	public ResponseEntity<?> getBookings(){
 		try {
 			return new ResponseEntity<>(bookRepo.findAll(), HttpStatus.OK);
 		}catch(RuntimeException e) {
 			return new ResponseEntity<>("Failed to get Booking", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@PutMapping("/updateBooking")
+	public void updateCurrBooking(@RequestBody UpdatedBookingDetails bookingUpdateRequest){
+		      System.out.println(bookingUpdateRequest);
+		      Guide guide=guideRepo.findById(bookingUpdateRequest.getGuideId()).get();
+		      System.out.println(guide);
+		      Booking details=bookRepo.findById(bookingUpdateRequest.getBookingId()).get(); 
+		      System.out.println(details);
+		      details.setGuideId(guide);
+		      details.setStatus(bookingUpdateRequest.getBookingStatus());
+		      bookRepo.save(details);
+		      
 	}
 	
 	

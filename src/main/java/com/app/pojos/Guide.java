@@ -2,13 +2,11 @@ package com.app.pojos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -18,18 +16,19 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class Guide extends BaseEntity{
-	
-	@Column(name="name")
+@NoArgsConstructor
+public class Guide extends BaseEntity {
+
+	@Column(name="Guide_name")
 	private String name;
 	
-	@Column(name="mobile")
+	@Column(name="mobile_no")
 	private String mobile;
 	
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="known_location")
+	@Column(name="location_known")
 	private String locationKnown;
 	
 }
